@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="ejA-8r-pXL">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="adr-1g-rEt">
+            <objects>
+                <navigationController id="ejA-8r-pXL" sceneMemberID="viewController">
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="R2h-qL-kqD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="WoZ-lK-ncL" kind="relationship" relationship="rootViewController" id="u2A-ke-jp1"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Tb-Q8-RGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269" y="-456"/>
+        </scene>
+        <!--Cities List View Controller-->
+        <scene sceneID="ZxA-4m-lHO">
+            <objects>
+                <viewController storyboardIdentifier="CitiesListViewController" automaticallyAdjustsScrollViewInsets="NO" id="WoZ-lK-ncL" customClass="CitiesListViewController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YnO-Qc-n4s"/>
+                        <viewControllerLayoutGuide type="bottom" id="hRh-oo-NOA"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Rtc-Mc-tdJ">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WUq-t1-zIe">
+                                <rect key="frame" x="0.0" y="44" width="320" height="524"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="WoZ-lK-ncL" id="qHp-WD-WPS"/>
+                                    <outlet property="delegate" destination="WoZ-lK-ncL" id="rwp-rN-eRj"/>
+                                </connections>
+                            </tableView>
+                            <searchBar contentMode="redraw" placeholder="Enter city name" translatesAutoresizingMaskIntoConstraints="NO" id="yTe-bE-yQ9">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="yes" spellCheckingType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="WoZ-lK-ncL" id="ezL-pr-ap8"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hRh-oo-NOA" firstAttribute="top" secondItem="WUq-t1-zIe" secondAttribute="bottom" id="JZU-We-tvh"/>
+                            <constraint firstItem="WUq-t1-zIe" firstAttribute="top" secondItem="yTe-bE-yQ9" secondAttribute="bottom" id="ODr-6K-nHX"/>
+                            <constraint firstAttribute="trailing" secondItem="yTe-bE-yQ9" secondAttribute="trailing" id="T1e-c1-w4X"/>
+                            <constraint firstItem="yTe-bE-yQ9" firstAttribute="leading" secondItem="Rtc-Mc-tdJ" secondAttribute="leading" id="dwZ-NM-QK7"/>
+                            <constraint firstItem="WUq-t1-zIe" firstAttribute="leading" secondItem="Rtc-Mc-tdJ" secondAttribute="leading" id="eqM-ch-xKH"/>
+                            <constraint firstItem="yTe-bE-yQ9" firstAttribute="top" secondItem="YnO-Qc-n4s" secondAttribute="bottom" id="hnY-sN-a5n"/>
+                            <constraint firstAttribute="trailing" secondItem="WUq-t1-zIe" secondAttribute="trailing" id="ldJ-sj-pfg"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="J9o-7q-awr"/>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="theSearchBar" destination="yTe-bE-yQ9" id="LRF-tB-KuW"/>
+                        <outlet property="theTableView" destination="WUq-t1-zIe" id="yqP-WU-ztv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nZp-0v-1Nx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="269" y="298"/>
+        </scene>
+    </scenes>
+</document>
