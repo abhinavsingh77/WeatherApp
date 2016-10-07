@@ -67,6 +67,16 @@ class CitiesListViewController: WeatherAppViewController, UITableViewDataSource,
         return cell!
     }
     
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let city = self.citiesList[indexPath.row]
+        if let details = CityDetailsViewController(cityParam: city) {
+            self.navigationController?.pushViewController(details, animated: true)
+        }
+        
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
     func searchBar(searchBar: UISearchBar, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         
         return true
@@ -85,7 +95,7 @@ class CitiesListViewController: WeatherAppViewController, UITableViewDataSource,
             
             if let newCity = city {
                 
-                self?.citiesList.append(newCity)
+                self?.citiesList.insert(newCity, atIndex: 0)
                 self?.theTableView?.reloadData()
             }
             else if let newErrorType = errorType {

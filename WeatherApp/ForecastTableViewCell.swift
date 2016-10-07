@@ -21,6 +21,13 @@ class ForecastTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         
         super.awakeFromNib()
+        
+        titleLabel?.font = UIFont.boldSystemFontOfSize(15)
+        
+        minTempLabel?.font = UIFont.boldSystemFontOfSize(12)
+        maxTempLabel?.font = UIFont.boldSystemFontOfSize(12)
+        pressureLabel?.font = UIFont.boldSystemFontOfSize(12)
+        humidityLabel?.font = UIFont.boldSystemFontOfSize(12)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -28,11 +35,19 @@ class ForecastTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
+    func attributedString(title:String, subTitle:String) -> NSAttributedString {
+        
+        let complete = title + "\n" + subTitle
+        let attributed = NSMutableAttributedString.init(string: complete, attributes: [NSFontAttributeName:UIFont.systemFontOfSize(12), NSForegroundColorAttributeName:UIColor.init(white:0, alpha: 0.5)])
+        
+        attributed.addAttributes([NSForegroundColorAttributeName:UIColor.blackColor(), NSFontAttributeName:UIFont.boldSystemFontOfSize(12)], range:NSMakeRange(0, title.characters.count))
+        
+        return attributed
+    }
+    
     func showDetailsOfForecast(forecast:Forecast?, cityName:String?) {
         
-        displayedForecast = forecast
         if (cityName != nil) {
-            
             titleLabel?.text = cityName
         }else {
             titleLabel?.text = "Today"
@@ -51,9 +66,21 @@ class ForecastTableViewCell: UITableViewCell {
         
         displayedForecast = forCas;
         
-        minTempLabel?.text = "Minimum:\n\(forCas.minTemp)"
-        maxTempLabel?.text = "Maximum:\n\(forCas.maxTemp)"
-        humidityLabel?.text = "Humidity:\n\(forCas.humidity)"
-        pressureLabel?.text = "Pressure:\n\(forCas.pressure)"
+        minTempLabel?.attributedText = attributedString("Minimum", subTitle: "\(forCas.minTemp)")
+        maxTempLabel?.attributedText = attributedString("Maximum", subTitle: "\(forCas.maxTemp)")
+        humidityLabel?.attributedText = attributedString("Humidity", subTitle: "\(forCas.humidity)")
+        pressureLabel?.attributedText = attributedString("Pressure", subTitle: "\(forCas.pressure)")
+    }
+    
+    func showDetailsOfForecast(forecast:Forecast) {
+        
+        displayedForecast = forecast
+        
+        titleLabel?.text = forecast.date.stringValue()
+        
+        minTempLabel?.attributedText = attributedString("Minimum", subTitle: "\(forecast.minTemp)")
+        maxTempLabel?.attributedText = attributedString("Maximum", subTitle: "\(forecast.maxTemp)")
+        humidityLabel?.attributedText = attributedString("Humidity", subTitle: "\(forecast.humidity)")
+        pressureLabel?.attributedText = attributedString("Pressure", subTitle: "\(forecast.pressure)")
     }
 }

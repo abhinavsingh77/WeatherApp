@@ -53,7 +53,12 @@ class NetworkManager {
                     
                     guard let scode = someDict["cod"] as? Int where scode == 200 else {
                         
-                        block(nil, WeatherAppError.WeatherAppErrorInvalidStatusCode);
+                        guard let scode = someDict["cod"] as? String where scode == "200" else {
+                            block(nil, WeatherAppError.WeatherAppErrorInvalidStatusCode);
+                            return
+                        }
+                        
+                        block(someDict, nil);
                         return
                     }
                     
@@ -110,14 +115,13 @@ class NetworkManager {
                         block(nil, WeatherAppError.WeatherAppErrorInvalidData);
                         return;
                     }
-                    guard let city = City(dict:dataObject) else {
-                        block(nil, WeatherAppError.WeatherAppErrorInitilizatoinFailed);
-                        return;
-                    }
+                    
+                    city.addForecastsFromDictionary(dataObject)
                     block(city, nil);
                 }
             })]
         }else {
+            
             block(nil, WeatherAppError.WeatherAppErrorInvalidUrl);
         }
     }

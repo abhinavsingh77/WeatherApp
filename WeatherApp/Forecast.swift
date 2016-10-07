@@ -40,5 +40,28 @@ class Forecast {
             return nil;
         }
     }
+    
+    init?(dataDict:[String:AnyObject]) {
+        
+        guard let dateinterval = dataDict["dt"] as? Double,
+            pres = dataDict["pressure"] as? Double,
+            hum = dataDict["humidity"] as? Double,
+        tempDict = dataDict["temp"] as? [String:AnyObject] else {
+                
+                return nil
+        }
+        
+        guard let miTemp = tempDict["min"] as? Double,
+            maTemp = tempDict["max"] as? Double else {
+                
+                return nil
+        }
+        
+        minTemp = miTemp
+        maxTemp = maTemp
+        date = NSDate.init(timeIntervalSince1970:dateinterval);
+        pressure = pres
+        humidity = hum
+    }
 }
 

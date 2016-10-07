@@ -14,10 +14,10 @@ enum WeatherAppValidationError : ErrorType {
     case WeatherAppValidationErrorEmptyString
     
     init() {
+        
         self = WeatherAppValidationUnknown
     }
 }
-
 
 class WeatherAppViewController: UIViewController {
     

@@ -36,16 +36,30 @@ class City {
         name = gname
         cityId = cId
         
-        guard let mainTempDict = dict["main"] as? [String:AnyObject],
-                dateInterval = dict["dt"] as? Double
-        else {
+        guard let mainTempDict = dict["main"] as? [String:AnyObject], dateInterval = dict["dt"] as? Double else {
+            
             return;
         }
         
         guard let cast = Forecast(dataDict:mainTempDict, dateinterval:dateInterval) else {
+            
             return;
         }
         
         forecasts.append(cast);
+    }
+    
+    func addForecastsFromDictionary(dataDict:[String:AnyObject]) {
+        
+        if let forecastList = dataDict["list"] as? [[String:AnyObject]]{
+            
+            for item in forecastList {
+                
+                if let cast = Forecast(dataDict:item) {
+                    
+                    forecasts.append(cast);
+                }
+            }
+        }
     }
 }
